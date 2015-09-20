@@ -9,15 +9,35 @@ public final class HelloWorldProto {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   static com.google.protobuf.Descriptors.Descriptor
-    internal_static_helloworld_HelloRequest_descriptor;
+    internal_static_helloworld_NickRequest_descriptor;
   static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_helloworld_HelloRequest_fieldAccessorTable;
+      internal_static_helloworld_NickRequest_fieldAccessorTable;
   static com.google.protobuf.Descriptors.Descriptor
-    internal_static_helloworld_HelloResponse_descriptor;
+    internal_static_helloworld_ChannelRequest_descriptor;
   static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_helloworld_HelloResponse_fieldAccessorTable;
+      internal_static_helloworld_ChannelRequest_fieldAccessorTable;
+  static com.google.protobuf.Descriptors.Descriptor
+    internal_static_helloworld_SendToRequest_descriptor;
+  static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_helloworld_SendToRequest_fieldAccessorTable;
+  static com.google.protobuf.Descriptors.Descriptor
+    internal_static_helloworld_SendAllRequest_descriptor;
+  static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_helloworld_SendAllRequest_fieldAccessorTable;
+  static com.google.protobuf.Descriptors.Descriptor
+    internal_static_helloworld_StatusResponse_descriptor;
+  static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_helloworld_StatusResponse_fieldAccessorTable;
+  static com.google.protobuf.Descriptors.Descriptor
+    internal_static_helloworld_MessageResponse_descriptor;
+  static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_helloworld_MessageResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -27,12 +47,26 @@ public final class HelloWorldProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021hello_world.proto\022\nhelloworld\"\034\n\014Hello" +
-      "Request\022\014\n\004name\030\001 \001(\t\" \n\rHelloResponse\022\017" +
-      "\n\007message\030\001 \001(\t2L\n\007Greeter\022A\n\010SayHello\022\030" +
-      ".helloworld.HelloRequest\032\031.helloworld.He" +
-      "lloResponse\"\000B0\n\033io.grpc.examples.hellow" +
-      "orldB\017HelloWorldProtoP\001b\006proto3"
+      "\n\021hello_world.proto\022\nhelloworld\"\033\n\013NickR" +
+      "equest\022\014\n\004nick\030\001 \001(\t\"/\n\016ChannelRequest\022\017" +
+      "\n\007channel\030\001 \001(\t\022\014\n\004nick\030\002 \001(\t\"?\n\rSendToR" +
+      "equest\022\017\n\007message\030\001 \001(\t\022\017\n\007channel\030\002 \001(\t" +
+      "\022\014\n\004nick\030\003 \001(\t\"/\n\016SendAllRequest\022\017\n\007mess" +
+      "age\030\001 \001(\t\022\014\n\004nick\030\002 \001(\t\" \n\016StatusRespons" +
+      "e\022\016\n\006status\030\001 \001(\010\"\"\n\017MessageResponse\022\017\n\007" +
+      "message\030\001 \003(\t2\234\003\n\004Chat\022@\n\007SetNick\022\027.hell" +
+      "oworld.NickRequest\032\032.helloworld.StatusRe" +
+      "sponse\"\000\022E\n\013GetMessages\022\027.helloworld.Nic",
+      "kRequest\032\033.helloworld.MessageResponse\"\000\022" +
+      "@\n\004Join\022\032.helloworld.ChannelRequest\032\032.he" +
+      "lloworld.StatusResponse\"\000\022A\n\005Leave\022\032.hel" +
+      "loworld.ChannelRequest\032\032.helloworld.Stat" +
+      "usResponse\"\000\022A\n\006SendTo\022\031.helloworld.Send" +
+      "ToRequest\032\032.helloworld.StatusResponse\"\000\022" +
+      "C\n\007SendAll\022\032.helloworld.SendAllRequest\032\032" +
+      ".helloworld.StatusResponse\"\000B0\n\033io.grpc." +
+      "examples.helloworldB\017HelloWorldProtoP\001b\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -46,17 +80,41 @@ public final class HelloWorldProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_helloworld_HelloRequest_descriptor =
+    internal_static_helloworld_NickRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_helloworld_HelloRequest_fieldAccessorTable = new
+    internal_static_helloworld_NickRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_helloworld_HelloRequest_descriptor,
-        new java.lang.String[] { "Name", });
-    internal_static_helloworld_HelloResponse_descriptor =
+        internal_static_helloworld_NickRequest_descriptor,
+        new java.lang.String[] { "Nick", });
+    internal_static_helloworld_ChannelRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_helloworld_HelloResponse_fieldAccessorTable = new
+    internal_static_helloworld_ChannelRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_helloworld_HelloResponse_descriptor,
+        internal_static_helloworld_ChannelRequest_descriptor,
+        new java.lang.String[] { "Channel", "Nick", });
+    internal_static_helloworld_SendToRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_helloworld_SendToRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_helloworld_SendToRequest_descriptor,
+        new java.lang.String[] { "Message", "Channel", "Nick", });
+    internal_static_helloworld_SendAllRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_helloworld_SendAllRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_helloworld_SendAllRequest_descriptor,
+        new java.lang.String[] { "Message", "Nick", });
+    internal_static_helloworld_StatusResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_helloworld_StatusResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_helloworld_StatusResponse_descriptor,
+        new java.lang.String[] { "Status", });
+    internal_static_helloworld_MessageResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_helloworld_MessageResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_helloworld_MessageResponse_descriptor,
         new java.lang.String[] { "Message", });
   }
 
