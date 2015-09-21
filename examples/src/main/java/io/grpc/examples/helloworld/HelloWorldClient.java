@@ -44,7 +44,7 @@ public class HelloWorldClient {
     }
   }
 
-  public boolean join(String nick, String channelName) {
+  public boolean join(String channelName, String nick) {
     try {
       ChannelRequest request = ChannelRequest.newBuilder().setNick(nick).setChannel(channelName).build();
       StatusResponse response = blockingStub.join(request);
@@ -55,7 +55,7 @@ public class HelloWorldClient {
     }
   }
  
- public boolean leave(String nick, String channelName) {
+ public boolean leave(String channelName, String nick) {
     try {
       ChannelRequest request = ChannelRequest.newBuilder().setNick(nick).setChannel(channelName).build();
       StatusResponse response = blockingStub.leave(request);

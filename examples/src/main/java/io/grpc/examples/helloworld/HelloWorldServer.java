@@ -78,6 +78,7 @@ public class HelloWorldServer {
 			StatusResponse reply;
 			String nickname = req.getNick();
 			
+			System.out.println("Nick " + nickname);
 			if (user_membership.containsKey(nickname)){
 				reply = StatusResponse.newBuilder().setStatus(false).build();
 			}else{
@@ -96,6 +97,7 @@ public class HelloWorldServer {
 			String nickname = req.getNick();
 			String channelname = req.getChannel();
 			
+			System.out.println("Join " + nickname + " #" + channelname);
 			if (user_membership.containsKey(nickname)){
 				if (user_membership.get(nickname).contains(channelname)){
 					reply = StatusResponse.newBuilder().setStatus(false).build();
