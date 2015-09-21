@@ -9,7 +9,6 @@ buildscript {
 }
 
 subprojects {
-    apply plugin: "checkstyle"
     apply plugin: "java"
     apply plugin: "maven"
     apply plugin: "idea"
@@ -185,23 +184,6 @@ subprojects {
       }
     }
 
-    checkstyle {
-        configFile = file("$rootDir/checkstyle.xml")
-        toolVersion = "6.5"
-        ignoreFailures = false
-        if (rootProject.hasProperty("checkstyle.ignoreFailures")) {
-            ignoreFailures = rootProject.properties["checkstyle.ignoreFailures"].toBoolean()
-        }
-        configProperties["rootDir"] = rootDir
-    }
-
-    checkstyleMain {
-        source = fileTree(dir: "src/main", include: "**/*.java")
-    }
-
-    checkstyleTest {
-        source = fileTree(dir: "src/test", include: "**/*.java")
-    }
 
     task javadocJar(type: Jar) {
         classifier = 'javadoc'

@@ -9,3 +9,4 @@ protobuf-nano/build/
 protobuf/build/
 stub/build/
 testing/build/
+examples/build/

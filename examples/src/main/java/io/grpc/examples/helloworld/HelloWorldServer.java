@@ -24,7 +24,7 @@ public class HelloWorldServer {
 
   private void start() throws Exception {
     server = ServerBuilder.forPort(port)
-        .addService(GreeterGrpc.bindService(new ChatImpl()))
+        .addService(ChatGrpc.bindService(new ChatImpl()))
         .build()
         .start();
     logger.info("Server started, listening on " + port);
@@ -75,15 +75,15 @@ public class HelloWorldServer {
 
 		@Override
 		public void setNick(NickRequest req, StreamObserver<StatusResponse> responseObserver) {
-			HelloResponse reply;
+			StatusResponse reply;
 			String nickname = req.getNick();
 			
 			if (user_membership.containsKey(nickname)){
-				reply = HelloResponse.newBuilder().setStatus(false).build();
+				reply = StatusResponse.newBuilder().setStatus(false).build();
 			}else{
 				user_membership.put(nickname, new ArrayList<String>());
 				user_message.put(nickname, new ArrayList<String>());
-				reply = HelloResponse.newBuilder().setStatus(true).build();
+				reply = StatusResponse.newBuilder().setStatus(true).build();
 			}
 		  
 			responseObserver.onNext(reply);
@@ -92,18 +92,19 @@ public class HelloWorldServer {
 		
 		@Override
 		public void join(ChannelRequest req, StreamObserver<StatusResponse> responseObserver) {
-			HelloResponse reply;
+			StatusResponse reply;
 			String nickname = req.getNick();
+			String channelname = req.getChannel();
 			
 			if (user_membership.containsKey(nickname)){
 				if (user_membership.get(nickname).contains(channelname)){
-					reply = HelloResponse.newBuilder().setStatus(false).build();
+					reply = StatusResponse.newBuilder().setStatus(false).build();
 				}else{
 					user_membership.get(nickname).add(channelname);
-					reply = HelloResponse.newBuilder().setStatus(true).build();
+					reply = StatusResponse.newBuilder().setStatus(true).build();
 				}
 			}else{
-				reply = HelloResponse.newBuilder().setStatus(false).build();
+				reply = StatusResponse.newBuilder().setStatus(false).build();
 			}
 			
 			responseObserver.onNext(reply);
@@ -112,18 +113,19 @@ public class HelloWorldServer {
 		
 		@Override
 		public void leave(ChannelRequest req, StreamObserver<StatusResponse> responseObserver) {
-			HelloResponse reply;
+			StatusResponse reply;
 			String nickname = req.getNick();
+			String channelname = req.getChannel();
 			
 			if (user_membership.containsKey(nickname)){
 				if (user_membership.get(nickname).contains(channelname)){
 					user_membership.get(nickname).remove(channelname);
-					reply = HelloResponse.newBuilder().setStatus(true).build();
+					reply = StatusResponse.newBuilder().setStatus(true).build();
 				}else{
-					reply = HelloResponse.newBuilder().setStatus(false).build();
+					reply = StatusResponse.newBuilder().setStatus(false).build();
 				}
 			}else{
-				reply = HelloResponse.newBuilder().setStatus(false).build();
+				reply = StatusResponse.newBuilder().setStatus(false).build();
 			}
 			
 			responseObserver.onNext(reply);
@@ -132,21 +134,21 @@ public class HelloWorldServer {
 		
 		@Override
 		public void sendTo(SendToRequest req, StreamObserver<StatusResponse> responseObserver) {
-			HelloResponse reply;
+			StatusResponse reply;
 			String nickname = req.getNick();
 			String message = req.getMessage();
 			String channelname = req.getChannel();
 			
 			sendto(message, channelname, nickname);
 
-			reply = HelloResponse.newBuilder().setStatus(true).build();
+			reply = StatusResponse.newBuilder().setStatus(true).build();
 			responseObserver.onNext(reply);
 			responseObserver.onCompleted();
 		}
 		
 		@Override
 		public void sendAll(SendAllRequest req, StreamObserver<StatusResponse> responseObserver) {
-			HelloResponse reply;
+			StatusResponse reply;
 			String nickname = req.getNick();
 			String message = req.getMessage();
 			
@@ -156,7 +158,7 @@ public class HelloWorldServer {
 				sendto(message, user_membership.get(nickname).get(i), nickname);
 			}
 
-			reply = HelloResponse.newBuilder().setStatus(true).build();
+			reply = StatusResponse.newBuilder().setStatus(true).build();
 			responseObserver.onNext(reply);
 			responseObserver.onCompleted();
 		}
