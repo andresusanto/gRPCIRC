@@ -163,6 +163,7 @@ public class HelloWorldServer {
 		
 		@Override
 		public void getMessages(NickRequest req, StreamObserver<MessageResponse> responseObserver) {
+			String nickname = req.getNick();
 			List<String> message = new ArrayList<String>(user_message.get(nickname));
 			user_message.get(nickname).clear();
 			
