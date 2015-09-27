@@ -1,222 +1,65 @@
-gRPC-Java - An RPC library and framework
-========================================
+#gRPC-IRC
+![gRPC IRC](/../screenshoot/screenshoots/server.png?raw=true "gRPC IRC")
 
-[![Build Status](https://travis-ci.org/grpc/grpc-java.svg?branch=master)](https://travis-ci.org/grpc/grpc-java)
-[![Coverage Status](https://coveralls.io/repos/grpc/grpc-java/badge.svg?branch=master&service=github)](https://coveralls.io/github/grpc/grpc-java?branch=master)
+a Simple IRC Chat that is implemented by using Protocol Buffers and gRPC
 
-gRPC-Java works with JDK 6. TLS usage typically requires using Java 8, or Play
-Services Dynamic Security Provider on Android. Please see the [Security
-Readme](SECURITY.md).
+## Introduction
+1. [What is Protobuf (Protocol Buffers)?] (https://developers.google.com/protocol-buffers/)
+2. [What is gRPC] (http://www.grpc.io/)
 
-Download
---------
+This project is an example of IRC like (chatting application) Implementation by using Protobuf and gRPC Technology in Java. This project is based from [grpc-java] (https://github.com/grpc/grpc-java) repository.
 
-Download [the JAR][]. Or for Maven, add to your `pom.xml`:
-```xml
-<dependency>
-  <groupId>io.grpc</groupId>
-  <artifactId>grpc-all</artifactId>
-  <version>0.8.0</version>
-</dependency>
+## Building Information
+In this project, I used RHEL 7 x64 based operating to build and compile the project. I recommend you to do the same because it will be much easier for gradle to find the dependencies for this project by using this OS rather than Windows. So, in order to fully compile this project (including the `proto` files), you will need these:
+
+1. JDK & JRE 1.7+
+2. gcc and g++
+3. c static library package
+
+If you met all the above requirements you can begin by compiling protobuf. First download protobuf sources in [GitHub] (https://github.com/google/protobuf). It's recommended to download the *released* version in releases tab rather than download the source directly from `main` branch. After downloading the sources, extract it and issue the following command to compile and install it:
+
+```
+$ ./configure
+$ make
+$ make check
+$ make install
 ```
 
-Or for Gradle, add to your dependencies:
-```gradle
-compile 'io.grpc:grpc-all:0.8.0'
+After compiling and installing protobuf, you now have two alternatives:
+
+1. Download grpc-java source, compile it, append this project to it, or
+2. Download gRPCIRC sources from a branch called `full_repo`.
+
+If you choose the **first option** your next step is downloading (gRPC implementation in Java)  [https://github.com/grpc/grpc-java]. After downloading it, extract the archieve and build it by issuing the following command:
+
+```
+./gradlew build
 ```
 
-[the JAR]: https://search.maven.org/remote_content?g=io.grpc&a=grpc-all&v=0.8.0
-
-Development snapshots are available in [Sonatypes's snapshot
-repository](https://oss.sonatype.org/content/repositories/snapshots/).
-
-For protobuf-based codegen integrated with the Maven build system, you can use
-[maven-protoc-plugin][]:
-```xml
-<pluginRepositories>
-  <pluginRepository>
-    <releases>
-      <updatePolicy>never</updatePolicy>
-    </releases>
-    <snapshots>
-      <enabled>false</enabled>
-    </snapshots>
-    <id>central</id>
-    <name>Central Repository</name>
-    <url>https://repo.maven.apache.org/maven2</url>
-  </pluginRepository>
-  <pluginRepository>
-    <id>protoc-plugin</id>
-    <url>https://dl.bintray.com/sergei-ivanov/maven/</url>
-  </pluginRepository>
-</pluginRepositories>
-<build>
-  <extensions>
-    <extension>
-      <groupId>kr.motd.maven</groupId>
-      <artifactId>os-maven-plugin</artifactId>
-      <version>1.4.0.Final</version>
-    </extension>
-  </extensions>
-  <plugins>
-    <plugin>
-      <groupId>com.google.protobuf.tools</groupId>
-      <artifactId>maven-protoc-plugin</artifactId>
-      <version>0.4.2</version>
-      <configuration>
-        <!--
-          The version of protoc must match protobuf-java. If you don't depend on
-          protobuf-java directly, you will be transitively depending on the
-          protobuf-java version that grpc depends on.
-        -->
-        <protocArtifact>com.google.protobuf:protoc:3.0.0-alpha-3.1:exe:${os.detected.classifier}</protocArtifact>
-        <pluginId>grpc-java</pluginId>
-        <pluginArtifact>io.grpc:protoc-gen-grpc-java:0.8.0:exe:${os.detected.classifier}</pluginArtifact>
-      </configuration>
-      <executions>
-        <execution>
-          <goals>
-            <goal>compile</goal>
-            <goal>compile-custom</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-  </plugins>
-</build>
+after building completed, download this project from `master` branch, and copy the files into grpc-java folder. After that, issue the following commands:
+```
+cd tugaspat
+../gradlew build
+../gradlww installDist
 ```
 
-[maven-protoc-plugin]: http://sergei-ivanov.github.io/maven-protoc-plugin/
-
-For protobuf-based codegen integrated with the Gradle build system, you can use
-[protobuf-gradle-plugin][]:
-```gradle
-apply plugin: 'java'
-apply plugin: 'com.google.protobuf'
-
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.6.1'
-  }
-}
-
-protobuf {
-  protoc {
-    // The version of protoc must match protobuf-java. If you don't depend on
-    // protobuf-java directly, you will be transitively depending on the
-    // protobuf-java version that grpc depends on.
-    artifact = "com.google.protobuf:protoc:3.0.0-alpha-3.1"
-  }
-  plugins {
-    grpc {
-      artifact = 'io.grpc:protoc-gen-grpc-java:0.8.0'
-    }
-  }
-  generateProtoTasks {
-    all()*.plugins {
-      grpc {}
-    }
-  }
-}
+If you choose the **second option** your next step is downloading this project from `full_repo` branch and compile it bu issuing the following command:
+```
+./gradlew build
+cd tugaspat
+../gradlew build
+../gradlww installDist
 ```
 
-[protobuf-gradle-plugin]: https://github.com/google/protobuf-gradle-plugin
+For **both options**, after issuing the build commands, you will find the compiled binaries in `tugaspat/build` folder. To run the project you can issue the following command (fist, run the server):
+```
+cd tugaspat/build/install/grpc-tugaspat/bin/
+./irc-server
+```
 
-How to Build
-------------
+then run the client:
 
-If you are making changes to gRPC-Java, see the [compiling
-instructions](COMPILING.md).
+```
+./irc-client
+```
 
-Navigating Around the Source
-----------------------------
-
-Here's a quick readers' guide to the code to help folks get started. At a high
-level there are three distinct layers to the library: __Stub__, __Channel__ &
-__Transport__.
-
-### Stub
-
-The Stub layer is what is exposed to most developers and provides type-safe
-bindings to whatever datamodel/IDL/interface you are adapting. gRPC comes with
-a [plugin](https://github.com/google/grpc-java/blob/master/compiler) to the
-protocol-buffers compiler that generates Stub interfaces out of `.proto` files,
-but bindings to other datamodel/IDL should be trivial to add and are welcome.
-
-#### Key Interfaces
-
-[Stream Observer](https://github.com/google/grpc-java/blob/master/stub/src/main/java/io/grpc/stub/StreamObserver.java)
-
-### Channel
-
-The Channel layer is an abstraction over Transport handling that is suitable for
-interception/decoration and exposes more behavior to the application than the
-Stub layer. It is intended to be easy for application frameworks to use this
-layer to address cross-cutting concerns such as logging, monitoring, auth etc.
-Flow-control is also exposed at this layer to allow more sophisticated
-applications to interact with it directly.
-
-#### Common
-
-* [Metadata - headers & trailers](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/Metadata.java)
-* [Status - error code namespace & handling](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/Status.java)
-
-#### Client
-* [Channel - client side binding](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/Channel.java)
-* [Client Call](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/ClientCall.java)
-* [Client Interceptor](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/ClientInterceptor.java)
-
-#### Server
-* [Server call handler - analog to Channel on server](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/ServerCallHandler.java)
-* [Server Call](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/ServerCall.java)
-
-
-### Transport
-
-The Transport layer does the heavy lifting of putting and taking bytes off the
-wire. The interfaces to it are abstract just enough to allow plugging in of
-different implementations. Transports are modeled as `Stream` factories. The
-variation in interface between a server Stream and a client Stream exists to
-codify their differing semantics for cancellation and error reporting.
-
-Note the transport layer API is considered internal to gRPC and has weaker API
-guarantees than the core API under package `io.grpc`.
-
-gRPC comes with three Transport implementations:
-
-1. The [Netty-based](https://github.com/google/grpc-java/blob/master/netty)
-   transport is the main transport implementation based on
-   [Netty](http://netty.io). It is for both the client and the server.
-2. The [OkHttp-based](https://github.com/google/grpc-java/blob/master/okhttp)
-   transport is a lightweight transport based on
-   [OkHttp](http://square.github.io/okhttp/). It is mainly for use on Android
-   and is for client only.
-3. The
-   [inProcess](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/inprocess)
-   transport is for when a server is in the same process as the client. It is
-   useful for testing.
-
-#### Common
-
-* [Stream](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/Stream.java)
-* [Stream Listener](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/StreamListener.java)
-
-#### Client
-
-* [Client Stream](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/ClientStream.java)
-* [Client Stream Listener](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/ClientStreamListener.java)
-
-#### Server
-
-* [Server Stream](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/ServerStream.java)
-* [Server Stream Listener](https://github.com/google/grpc-java/blob/master/core/src/main/java/io/grpc/internal/ServerStreamListener.java)
-
-
-### Examples
-
-Tests showing how these layers are composed to execute calls using protobuf
-messages can be found here
-https://github.com/google/grpc-java/tree/master/interop-testing/src/main/java/io/grpc/testing/integration
