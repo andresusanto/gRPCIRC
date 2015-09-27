@@ -30,7 +30,7 @@ After compiling and installing protobuf, you now have two alternatives:
 1. Download grpc-java source, compile it, append this project to it, or
 2. Download gRPCIRC sources from a branch called `full_repo`.
 
-If you choose the **first option** your next step is downloading (gRPC implementation in Java)   [https://github.com/grpc/grpc-java]. After downloading it, extract the archieve and build it by issuing the following command:
+If you choose the **first option** your next step is downloading [gRPC implementation in Java] (https://github.com/grpc/grpc-java). After downloading it, extract the archieve and build it by issuing the following command:
 
 ```
 ./gradlew build
