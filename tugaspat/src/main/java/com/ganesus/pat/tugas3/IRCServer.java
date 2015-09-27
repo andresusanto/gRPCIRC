@@ -25,7 +25,7 @@ public class IRCServer {
 
   private void start() throws Exception {
     server = ServerBuilder.forPort(port)
-        .addService(GreeterGrpc.bindService(new ChatImpl()))
+        .addService(ChatGrpc.bindService(new ChatImpl()))
         .build()
         .start();
     logger.info("Server started, listening on " + port);
