@@ -30,21 +30,21 @@ After compiling and installing protobuf, you now have two alternatives:
 1. Download grpc-java source, compile it, append this project to it, or
 2. Download gRPCIRC sources from a branch called `full_repo`.
 
-If you choose the **first option** your next step is downloading (gRPC implementation in Java)  [https://github.com/grpc/grpc-java]. After downloading it, extract the archieve and build it by issuing the following command:
+If you choose the **first option** your next step is downloading (gRPC implementation in Java)   [https://github.com/grpc/grpc-java]. After downloading it, extract the archieve and build it by issuing the following command:
 
 ```
 ./gradlew build
 ```
 
 after building completed, download this project from `master` branch, and copy the files into grpc-java folder. After that, issue the following commands:
-```
+```bash
 cd tugaspat
 ../gradlew build
 ../gradlww installDist
 ```
 
 If you choose the **second option** your next step is downloading this project from `full_repo` branch and compile it bu issuing the following command:
-```
+```bash
 ./gradlew build
 cd tugaspat
 ../gradlew build
@@ -52,7 +52,8 @@ cd tugaspat
 ```
 
 For **both options**, after issuing the build commands, you will find the compiled binaries in `tugaspat/build` folder. To run the project you can issue the following command (fist, run the server):
-```
+
+```bash
 cd tugaspat/build/install/grpc-tugaspat/bin/
 ./irc-server
 ```
