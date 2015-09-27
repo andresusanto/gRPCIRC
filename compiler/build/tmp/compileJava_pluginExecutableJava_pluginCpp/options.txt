@@ -1,0 +1,10 @@
+/TP
+/nologo
+/EHsc
+/MD
+/c
+"/ID:\Tugas Sekolah\PAT\TUGAS 3\gRPCIRC\compiler\src\java_plugin\headers"
+"/IC:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include"
+"/IC:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include"
+"D:\Tugas Sekolah\PAT\TUGAS 3\gRPCIRC\compiler\src\java_plugin\cpp\java_generator.cpp"
+"/FoD:\Tugas Sekolah\PAT\TUGAS 3\gRPCIRC\compiler\build\objs\java_pluginExecutable\java_pluginCpp\4iwshua3wwbx7plnm0jbsx4qu\java_generator.obj"
