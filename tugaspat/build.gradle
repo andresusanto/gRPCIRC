@@ -24,28 +24,24 @@ dependencies {
 configureProtoCompilation()
 
 
-task helloWorldServer(type: CreateStartScripts) {
+task IRCServer(type: CreateStartScripts) {
     mainClassName = "com.ganesus.pat.tugas3.IRCServer"
-    applicationName = "hello-world-server"
+    applicationName = "irc-server"
     outputDir = new File(project.buildDir, 'tmp')
     classpath = jar.outputs.files + project.configurations.runtime
 }
 
-task helloWorldClient(type: CreateStartScripts) {
+task IRCClient(type: CreateStartScripts) {
     mainClassName = "com.ganesus.pat.tugas3.IRCClient"
-    applicationName = "hello-world-client"
+    applicationName = "irc-client"
     outputDir = new File(project.buildDir, 'tmp')
     classpath = jar.outputs.files + project.configurations.runtime
 }
 
-<<<<<<< HEAD:tugaspat/build.gradle
-=======
-
->>>>>>> origin/master:examples/build.gradle
 
 applicationDistribution.into("bin") {
-    from(helloWorldServer)
-    from(helloWorldClient)
+    from(IRCServer)
+    from(IRCClient)
     fileMode = 0755
 }
 
