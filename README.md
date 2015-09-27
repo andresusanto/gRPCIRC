@@ -51,16 +51,62 @@ cd tugaspat
 ../gradlww installDist
 ```
 
-For **both options**, after issuing the build commands, you will find the compiled binaries in `tugaspat/build` folder. To run the project you can issue the following command (fist, run the server):
+That's it!
+
+## Pre-built binaries
+Pre-built binaries can be found in `built-binaries` folder in project root folder. There are two scripts that can be used to easily run the program:
+
+1. `grpc-tugaspat/bin/irc-client` for client program
+2. `grpc-tugaspat/bin/irc-server` for server program
+
+## Running
+
+You will find the compiled binaries in `tugaspat/build/install/grpc-tugaspat/bin/` folder (or in `built-binaries/gprc-tugaspat/bin` folder if you didn't compile the project). To run the server you can issue the following command:
 
 ```bash
-cd tugaspat/build/install/grpc-tugaspat/bin/
 ./irc-server
 ```
 
-then run the client:
+And to run the client, issue the following command:
 
 ```
 ./irc-client
 ```
 
+## Tests and Execution Results
+I have performed several tests, here are the results:
+
+### Server Execution
+![gRPC IRC](/../screenshoot/screenshoots/server.png?raw=true "gRPC IRC")
+
+### Two Clients Test
+![gRPC Two clients](/../screenshoot/screenshoots/twoclients.png?raw=true "gRPC Two clients")
+
+**Scenario:**
+
+1. First client connected to server and picked a nickname.
+2. Second client then joined to the server and picked a nickname.
+3. Both client then joined *#IF-ITB*.
+4. First client sent a message to all channel that he joined.
+5. Second client received the message because he had joined *#IF-ITB*.
+
+### Leave Channel Test
+![gRPC Leave](/../screenshoot/screenshoots/leavetest.png?raw=true "gRPC Leave")
+
+**Scenario:**
+
+1. Second client leaved *#IF-ITB*
+2. First client sent messages to all channel
+3. Second client didn't receive the message as he had left #IF-ITB
+
+### Three clients
+![gRPC Three clients](/../screenshoot/screenshoots/threeclients.png?raw=true "gRPC Three clients")
+
+**Scenario:**
+
+1. Third client joined the server and pick a nick name
+2. First and second client were members of #IF-ITB and PAT. Third client was a member of #IF-ITB only.
+3. First client sent a message to all channel.
+4. All client could read the messages as they are members of IF-ITB.
+5. Second client sent a message to #PAT.
+6. Only first and second client that received the messages as they were the members of #PAT and third client wasn't.
