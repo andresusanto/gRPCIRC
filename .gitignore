@@ -1,0 +1,12 @@
+.gradle/
+all/build/
+auth/build/
+benchmarks/build/
+core/build/
+netty/build/
+okhttp/build/
+protobuf-nano/build/
+protobuf/build/
+stub/build/
+testing/build/
+examples/build/
